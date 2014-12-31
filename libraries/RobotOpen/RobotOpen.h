@@ -18,6 +18,7 @@
 #include <ROAnalog.h>
 #include <RODigitalIO.h>
 #include <RODashboard.h>
+#include <ROPWM.h>
 #include <ROStatus.h>
 #include <ROTimer.h>
 #include <ROParameter.h>

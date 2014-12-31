@@ -8,8 +8,8 @@
 
 /* I/O Setup */
 ROJoystick usb1(1);         // Joystick #1
-Servo leftDrive;
-Servo rightDrive;
+ROPWM leftDrive(5);
+ROPWM rightDrive(6);
 
 
 void setup()
@@ -17,8 +17,8 @@ void setup()
   /* Initiate comms */
   RobotOpen.begin(&enabled, &disabled, &timedtasks);
 
-  leftDrive.attach(5);
-  rightDrive.attach(6);
+  leftDrive.attach();
+  rightDrive.attach();
 }
 
 
@@ -29,8 +29,8 @@ void enabled() {
   int leftPower = constrain((usb1.rightY() + usb1.rightX()), 0, 255);
   int rightPower = constrain((usb1.rightY() - usb1.rightX()), 0, 255);
 
-  leftDrive.write(map(leftPower, 0, 255, 0, 180));
-  rightDrive.write(map(rightPower, 0, 255, 0, 180));
+  leftDrive.write(leftPower);
+  rightDrive.write(rightPower);
 }
 
 
@@ -39,8 +39,8 @@ void disabled() {
   // safety code
 
   // neutral out PWMs
-  leftDrive.write(90);
-  rightDrive.write(90);
+  leftDrive.write(127);
+  rightDrive.write(127);
 }
 
 

@@ -8,10 +8,10 @@
 
 /* I/O Setup */
 ROJoystick usb1(1);         // Joystick #1
-Servo pwm0;
-Servo pwm1;
-Servo pwm2;
-Servo pwm3;
+ROPWM pwm0(3);
+ROPWM pwm1(5);
+ROPWM pwm2(6);
+ROPWM pwm3(9);
 
 
 void setup()
@@ -20,10 +20,10 @@ void setup()
   RobotOpen.begin(&enabled, &disabled, &timedtasks);
 
   // attach PWMs
-  pwm0.attach(3);
-  pwm1.attach(5);
-  pwm2.attach(6);
-  pwm3.attach(9);
+  pwm0.attach();
+  pwm1.attach();
+  pwm2.attach();
+  pwm3.attach();
 }
 
 
@@ -52,10 +52,10 @@ void enabled() {
   }
 
   // Set PWMs, shifted back to [0..255]
-  pwm0.write(map(lf + 127, 0, 255, 0, 180));
-  pwm1.write(map(rf + 127, 0, 255, 0, 180));
-  pwm2.write(map(lr + 127, 0, 255, 0, 180));
-  pwm3.write(map(rr + 127, 0, 255, 0, 180));
+  pwm0.write(lf + 127);
+  pwm1.write(rf + 127);
+  pwm2.write(lr + 127);
+  pwm3.write(rr + 127);
 }
 
 
@@ -64,10 +64,10 @@ void disabled() {
   // safety code
 
   // neutral out PWMs
-  pwm0.write(90);
-  pwm1.write(90);
-  pwm2.write(90);
-  pwm3.write(90);
+  pwm0.write(127);
+  pwm1.write(127);
+  pwm2.write(127);
+  pwm3.write(127);
 }
 
 

@@ -8,8 +8,8 @@
 
 /* I/O Setup */
 ROJoystick usb1(1);         // Joystick #1
-Servo steerPWM;
-Servo throttlePWM;
+ROPWM steerPWM(5);
+ROPWM throttlePWM(6);
 
 
 void setup()
@@ -17,8 +17,8 @@ void setup()
   /* Initiate comms */
   RobotOpen.begin(&enabled, &disabled, &timedtasks);
 
-  steerPWM.attach(5);
-  throttlePWM.attach(6);
+  steerPWM.attach();
+  throttlePWM.attach();
 }
 
 
@@ -26,8 +26,8 @@ void setup()
  * should live here that allows the robot to operate
  */
 void enabled() {
-  steerPWM.write(map(usb1.rightX(), 0, 255, 0, 180));
-  throttlePWM.write(map(usb1.leftY(), 0, 255, 0, 180));
+  steerPWM.write(usb1.rightX());
+  throttlePWM.write(usb1.leftY());
 }
 
 
@@ -36,8 +36,8 @@ void disabled() {
   // safety code
 
   // neutral out PWMs
-  steerPWM.write(90);
-  throttlePWM.write(90);
+  steerPWM.write(127);
+  throttlePWM.write(127);
 }
 
 

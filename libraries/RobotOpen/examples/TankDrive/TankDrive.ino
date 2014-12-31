@@ -8,8 +8,8 @@
 
 /* I/O Setup */
 ROJoystick usb1(1);         // Joystick #1
-Servo leftDrive;
-Servo rightDrive;
+ROPWM leftDrive(5);
+ROPWM rightDrive(6);
 
 
 void setup()
@@ -17,8 +17,8 @@ void setup()
   /* Initiate comms */
   RobotOpen.begin(&enabled, &disabled, &timedtasks);
 
-  leftDrive.attach(5);
-  rightDrive.attach(6);
+  leftDrive.attach();
+  rightDrive.attach();
 }
 
 
@@ -31,8 +31,8 @@ void enabled() {
   // 255 - usb1.leftY() to invert a drive
 
   // Set left and right drive from joystick values
-  leftDrive.write(map(usb1.leftY(), 0, 255, 0, 180));
-  rightDrive.write(map(usb1.rightY(), 0, 255, 0, 180));
+  leftDrive.write(usb1.leftY());
+  rightDrive.write(usb1.rightY());
 }
 
 
@@ -41,8 +41,8 @@ void disabled() {
   // safety code
 
   // neutral out PWMs
-  leftDrive.write(90);
-  rightDrive.write(90);
+  leftDrive.write(127);
+  rightDrive.write(127);
 }
 
 
