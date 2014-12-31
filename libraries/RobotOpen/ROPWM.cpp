@@ -13,7 +13,7 @@
 #include "RobotOpen.h"
 
 
-/* Constructor */
+// Constructor
 ROPWM::ROPWM(uint8_t channel)
 {
     _channel = channel;
