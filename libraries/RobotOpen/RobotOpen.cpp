@@ -34,9 +34,11 @@
 #define OUTGOING_PACKET_BUFFER_SIZE 384
 #define MAX_PARAMETERS              25  // 1 header byte + (5 * 25) + 2 crc bytes = 128 bytes max
 
-// Set the MAC address and static IP for the TCP/IP stack
+// Set the MAC address and static IP, gateway, and subnet mask for the TCP/IP stack
 static byte mac[] = { 0xD4, 0x40, 0x39, 0xFB, 0xE0, 0x33 };
 static IPAddress ip(10, 0, 0, 22);
+static IPAddress gateway(10, 0, 0, 1);
+static IPAddress subnet(255, 255, 255, 0);
 
 // joystick data
 static int _total_joysticks = 0;
@@ -126,6 +128,12 @@ EthernetUDP Udp;
 void RobotOpenClass::setIP(IPAddress newIP) {
     ip = newIP;
 }
+void RobotOpenClass::setSubnet(IPAddress newSubnet) {
+    subnet = newSubnet;
+}
+void RobotOpenClass::setGateway(IPAddress newGateway) {
+    gateway = newGateway;
+}
 
 void RobotOpenClass::setTimeout(int new_timeout) {
     connection_timeout = new_timeout;
@@ -138,7 +146,7 @@ void RobotOpenClass::begin(LoopCallback *enabledCallback, LoopCallback *disabled
     whileTimedTasks = timedtasksCallback;
 
     // Start Ethernet, UDP
-    Ethernet.begin(mac,ip);
+    Ethernet.begin(mac,ip,gateway,subnet);
     Udp.begin(PORT);
 
     // Give Ethernet time to get ready
