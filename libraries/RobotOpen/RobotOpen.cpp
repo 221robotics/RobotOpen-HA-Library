@@ -128,9 +128,11 @@ EthernetUDP Udp;
 void RobotOpenClass::setIP(IPAddress newIP) {
     ip = newIP;
 }
+
 void RobotOpenClass::setSubnet(IPAddress newSubnet) {
     subnet = newSubnet;
 }
+
 void RobotOpenClass::setGateway(IPAddress newGateway) {
     gateway = newGateway;
 }
@@ -146,7 +148,7 @@ void RobotOpenClass::begin(LoopCallback *enabledCallback, LoopCallback *disabled
     whileTimedTasks = timedtasksCallback;
 
     // Start Ethernet, UDP
-    Ethernet.begin(mac,ip,gateway,subnet);
+    Ethernet.begin(mac, ip, gateway, subnet);
     Udp.begin(PORT);
 
     // Give Ethernet time to get ready
