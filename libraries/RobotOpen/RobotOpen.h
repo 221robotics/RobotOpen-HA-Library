@@ -32,13 +32,13 @@ class RobotOpenClass {
 public:
     // Set the IP address that the Robot controller will have
     static void setIP(IPAddress newIP);
-	
-	// Set the Subnet Mask that the Robot controller will have
-	static void setSubnet(IPAddress newSubnet);
-	
-	// Set the Gateway router that the Robot controller will have
+    
+    // Set the Subnet Mask that the Robot controller will have
+    static void setSubnet(IPAddress newSubnet);
+    
+    // Set the Gateway router that the Robot controller will have
     static void setGateway(IPAddress newGateway);
-	
+    
     // Configure timeout until robot considers itself disconnected
     static void setTimeout(int new_timeout);
 
