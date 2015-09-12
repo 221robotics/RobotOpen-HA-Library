@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <Ethernet.h>
 #include <EEPROM.h>
-#include <RobotOpenHA.h>
 #include <Servo.h>
+#include <RobotOpenHA.h>
 
 
 
